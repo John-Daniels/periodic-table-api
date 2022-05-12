@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const main = async () => {
-  const localUri = "mongodb://127.0.0.1:27017/peroidic-table-api1"
+  const localUri = "mongodb://127.0.0.1:27017/peroidic-table-api3"
   const uri = process.env.MONGODB_URI || localUri
   try {
     await mongoose.connect(uri, {

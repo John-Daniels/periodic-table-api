@@ -8,13 +8,13 @@ const router = new express.Router()
 router.get("/", async (req, res) => {
   let filters = {}
   try {
-    if (req.query.sort) filter["sort"] = req.query.sort == "desc" ? -1 : 1
-    if (req.query.limit) filter["limit"] = parseInt(req.query.limit)
+    if (req.query.sort) filters["sort"] = req.query.sort == "desc" ? -1 : 1
+    if (req.query.limit) filters["limit"] = parseInt(req.query.limit)
 
     const { sort, limit } = filters
     const elements = await Element.find()
       .sort({
-        desc: sort,
+        createdAt: sort,
       })
       .limit(limit)
 
@@ -27,8 +27,31 @@ router.get("/", async (req, res) => {
 
 //get element by name
 router.get("/:name", async (req, res) => {
+  if (!req.params.name)
+    return res.status(404).send({
+      error: "please provide a name",
+    })
+
   try {
     const element = await Element.findOne({ name: req.params.name })
+
+    if (!element) return res.status(400).send({ error: "Element Not Found" })
+    res.send(element)
+  } catch (e) {
+    console.log(e)
+    res.status(500).send(e)
+  }
+})
+
+//get element by symbol
+router.get("/symbol/:symbol", async (req, res) => {
+  if (!req.params.symbol)
+    return res.status(404).send({
+      error: "please provide a symbol",
+    })
+
+  try {
+    const element = await Element.findOne({ symbol: req.params.symbol })
 
     if (!element) return res.status(400).send({ error: "Element Not Found" })
     res.send(element)
@@ -42,8 +65,8 @@ router.post("/create", async (req, res) => {
   try {
     const newElement = req.body
     // custom messages
-    const checkElement = await Element.findOne({ symbol: newElement.symbol })
-    if (checkElement !== null)
+    const elementExists = await Element.findOne({ symbol: newElement.symbol })
+    if (elementExists)
       return res
         .status(400)
         .send({ general: `${newElement.name}, is already Defined!!!, ` })
