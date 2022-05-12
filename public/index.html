@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to the periodic table api</title>
+
+    <style>
+      main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        max-width: 50%;
+      }
+
+      a {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <h1>Periodic table api</h1>
+        <h3>~ How to use</h3>
+        <ul class="list"></ul>
+      </div>
+    </main>
+
+    <script>
+      let routes = [
+        {
+          link: "/api/periodic-table/elements/",
+          name: "Method /Get: get data from the database",
+        },
+        {
+          link: "/api/periodic-table/elements/name",
+          name: "Method /Get: get data from the database",
+        },
+        {
+          link: "/api/periodic-table/elements/delete/:symbol",
+          name: "Create user",
+        },
+        { link: "/api/periodic-table/elements/create", name: "Create user" },
+        {
+          link: "/api/periodic-table/elements/update/:symbol",
+          name: "/PATCH update data by symbol",
+        },
+        {
+          link: "/api/periodic-table/elements/delete/:symbol",
+          name: "/Delete, Delete data by symbol",
+        },
+      ]
+
+      let ul = document.querySelector(".list")
+
+      routes.forEach((route) => {
+        let li = document.createElement("li")
+        let p = document.createElement("p")
+        let a = document.createElement("a")
+
+        a.href = route.link
+        a.textContent = route.name
+        li.appendChild(a)
+
+        ul.append(li)
+      })
+    </script>
+  </body>
+</html>

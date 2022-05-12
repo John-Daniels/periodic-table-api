@@ -1,0 +1,26 @@
+{
+  "name": "chemistry-api",
+  "version": "1.0.0",
+  "description": "A periodic table api",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index",
+    "dev": "nodemon src/index",
+    "install": "npm install"
+  },
+  "author": "John Daniels",
+  "license": "MIT",
+  "dependencies": {
+    "ajio": "^0.0.1",
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.9",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "periodic-table": "^0.0.8"
+  }
+}
