@@ -30,7 +30,7 @@ router.get("/:name", async (req, res) => {
   try {
     const element = await Element.findOne({ name: req.params.name })
 
-    if (!element) res.status(400).send({ error: "Element Not Found" })
+    if (!element) return res.status(400).send({ error: "Element Not Found" })
     res.send(element)
   } catch (e) {
     console.log(e)
@@ -58,63 +58,64 @@ router.post("/create", async (req, res) => {
   }
 })
 
-router.patch("/update/:id", async (req, res) => {
-  const element = await Element.findOne({ _id: req.params.id })
-  // check where that element exists
-  if (!element) res.status(400).send({ error: "Element Not Found" })
+// no need for update(*_*)
+// router.patch("/update/:id", async (req, res) => {
+//   const element = await Element.findOne({ _id: req.params.id })
+//   // check where that element exists
+//   if (!element) return res.status(400).send({ error: "Element Not Found" })
 
-  const updates = Object.keys(req.body)
-  const allowedUpdates = [
-    "atomicNumber",
-    "symbol",
-    "name",
-    "atomicMass",
-    "cpkHexColor",
-    "electronicConfiguration",
-    "electronegativity",
-    "atomicRadius",
-    "ionRadius",
-    "vanDelWaalsRadius",
-    "ionizationEnergy",
-    "electronAffinity",
-    "oxidationStates",
-    "standardState",
-    "bondingType",
-    "meltingPoint",
-    "boilingPoint",
-    "density",
-    "groupBlock",
-    "yearDiscovered",
-  ]
+//   const updates = Object.keys(req.body)
+//   const allowedUpdates = [
+//     "atomicNumber",
+//     "symbol",
+//     "name",
+//     "atomicMass",
+//     "cpkHexColor",
+//     "electronicConfiguration",
+//     "electronegativity",
+//     "atomicRadius",
+//     "ionRadius",
+//     "vanDelWaalsRadius",
+//     "ionizationEnergy",
+//     "electronAffinity",
+//     "oxidationStates",
+//     "standardState",
+//     "bondingType",
+//     "meltingPoint",
+//     "boilingPoint",
+//     "density",
+//     "groupBlock",
+//     "yearDiscovered",
+//   ]
 
-  const isValidOp = updates.every((update) => allowedUpdates.includes(update))
+//   const isValidOp = updates.every((update) => allowedUpdates.includes(update))
 
-  if (!isValidOp) return res.status(400).send({ error: "Bad request" })
-  try {
-    updates.forEach((update) => (element[update] = req.body[update]))
-    await element.save()
+//   if (!isValidOp) return res.status(400).send({ error: "Bad request" })
+//   try {
+//     updates.forEach((update) => (element[update] = req.body[update]))
+//     await element.save()
 
-    res.send(element)
-  } catch (e) {
-    console.log(e)
-    res.send(e)
-  }
-})
+//     res.send(element)
+//   } catch (e) {
+//     console.log(e)
+//     res.send(e)
+//   }
+// })
 
-router.delete("/delete/:name", async (req, res) => {
-  try {
-    const element = await Element.findOne({ name: req.params.name })
-    // check where that element exists
-    if (!element) res.status(400).send({ error: "Element Not Found" })
+// no need for delete(*_*)
+// router.delete("/delete/:name", async (req, res) => {
+//   try {
+//     const element = await Element.findOne({ name: req.params.name })
+//     // check where that element exists
+//     if (!element) res.status(400).send({ error: "Element Not Found" })
 
-    await element.remove()
+//     await element.remove()
 
-    res.send({ general: "Succesful" })
-  } catch (e) {
-    console.log(e)
-    res.status(500).send(e)
-  }
-})
+//     res.send({ general: "Succesful" })
+//   } catch (e) {
+//     console.log(e)
+//     res.status(500).send(e)
+//   }
+// })
 
 module.exports = router
-// MONGODB_URI=mongodb+srv://John-Daniels:coders.js@peroidic-table.lwj7o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
