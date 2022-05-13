@@ -1,5 +1,5 @@
 {
-  "name": "chemistry-api",
+  "name": "periodic-table-api",
   "version": "1.0.0",
   "description": "A periodic table api",
   "main": "src/index.js",
