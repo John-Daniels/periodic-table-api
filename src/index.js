@@ -23,14 +23,17 @@ const port = process.env.PORT || 5000
 app.use(cors())
 // use this when debuging
 // app.use(morgan("dev"))
-app.use(express.json())
+app.use(express.json(public))
 
 app.use("/api/users", usersRouter)
 app.use("/api/elements", elementsRouter)
 
 // 404
-app.use("/*", (req, res) => {
-  res.redirect("https://github.com/John-Daniels/periodic-table-api")
-})
+app.use("/*", express.static())
+// app.use("/*", (req, res) => {
+//   // res.redirect("https://github.com/John-Daniels/periodic-table-api")
+
+//   res.send()
+// })
 
 app.listen(port, () => console.log(`server is up at port ${port}`))
