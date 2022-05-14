@@ -20,7 +20,6 @@ router.get("/", async (req, res) => {
 
     res.send(elements)
   } catch (e) {
-    console.log(e)
     res.send(e)
   }
 })
@@ -38,7 +37,6 @@ router.get("/:name", async (req, res) => {
     if (!element) return res.status(400).send({ error: "Element Not Found" })
     res.send(element)
   } catch (e) {
-    console.log(e)
     res.status(500).send(e)
   }
 })
@@ -56,7 +54,6 @@ router.get("/symbol/:symbol", async (req, res) => {
     if (!element) return res.status(400).send({ error: "Element Not Found" })
     res.send(element)
   } catch (e) {
-    console.log(e)
     res.status(500).send(e)
   }
 })
@@ -76,54 +73,52 @@ router.post("/create", async (req, res) => {
 
     res.status(201).send(element)
   } catch (e) {
-    console.log(e)
     res.status(500).send(e)
   }
 })
 
 // no need for update(*_*)
-// router.patch("/update/:id", async (req, res) => {
-//   const element = await Element.findOne({ _id: req.params.id })
-//   // check where that element exists
-//   if (!element) return res.status(400).send({ error: "Element Not Found" })
+router.patch("/update/:id", async (req, res) => {
+  const element = await Element.findOne({ _id: req.params.id })
+  // check where that element exists
+  if (!element) return res.status(400).send({ error: "Element Not Found" })
 
-//   const updates = Object.keys(req.body)
-//   const allowedUpdates = [
-//     "atomicNumber",
-//     "symbol",
-//     "name",
-//     "atomicMass",
-//     "cpkHexColor",
-//     "electronicConfiguration",
-//     "electronegativity",
-//     "atomicRadius",
-//     "ionRadius",
-//     "vanDelWaalsRadius",
-//     "ionizationEnergy",
-//     "electronAffinity",
-//     "oxidationStates",
-//     "standardState",
-//     "bondingType",
-//     "meltingPoint",
-//     "boilingPoint",
-//     "density",
-//     "groupBlock",
-//     "yearDiscovered",
-//   ]
+  const updates = Object.keys(req.body)
+  const allowedUpdates = [
+    "atomicNumber",
+    "symbol",
+    "name",
+    "atomicMass",
+    "cpkHexColor",
+    "electronicConfiguration",
+    "electronegativity",
+    "atomicRadius",
+    "ionRadius",
+    "vanDelWaalsRadius",
+    "ionizationEnergy",
+    "electronAffinity",
+    "oxidationStates",
+    "standardState",
+    "bondingType",
+    "meltingPoint",
+    "boilingPoint",
+    "density",
+    "groupBlock",
+    "yearDiscovered",
+  ]
 
-//   const isValidOp = updates.every((update) => allowedUpdates.includes(update))
+  const isValidOp = updates.every((update) => allowedUpdates.includes(update))
 
-//   if (!isValidOp) return res.status(400).send({ error: "Bad request" })
-//   try {
-//     updates.forEach((update) => (element[update] = req.body[update]))
-//     await element.save()
+  if (!isValidOp) return res.status(400).send({ error: "Bad request" })
+  try {
+    updates.forEach((update) => (element[update] = req.body[update]))
+    await element.save()
 
-//     res.send(element)
-//   } catch (e) {
-//     console.log(e)
-//     res.send(e)
-//   }
-// })
+    res.send(element)
+  } catch (e) {
+    res.send(e)
+  }
+})
 
 // no need for delete(*_*)
 // router.delete("/delete/:name", async (req, res) => {
@@ -136,7 +131,7 @@ router.post("/create", async (req, res) => {
 
 //     res.send({ general: "Succesful" })
 //   } catch (e) {
-//     console.log(e)
+
 //     res.status(500).send(e)
 //   }
 // })

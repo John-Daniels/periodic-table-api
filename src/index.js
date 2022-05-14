@@ -12,7 +12,7 @@ const path = require("path")
 
 //routers
 const elementsRouter = require("./routers/elements")
-const Element = require("./models/element")
+const usersRouter = require("./routers/users")
 
 // additional pages for (404)
 const public = path.resolve(__dirname, "../public")
@@ -21,9 +21,11 @@ const app = express()
 const port = process.env.PORT || 5000
 
 app.use(cors())
-app.use(morgan("dev"))
+// use this when debuging
+// app.use(morgan("dev"))
 app.use(express.json())
 
+app.use("/api/users", usersRouter)
 app.use("/api/elements", elementsRouter)
 
 // 404

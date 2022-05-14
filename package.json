@@ -1,8 +1,9 @@
 {
   "name": "periodic-table-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A periodic table api",
   "main": "src/index.js",
+  "homepage": "https://apis-periodic-table.herokuapp.com",
   "scripts": {
     "start": "node src/index",
     "dev": "nodemon src/index"

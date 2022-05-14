@@ -31,7 +31,7 @@ var ajio = require("ajio")
 
 ajio
   .post("/api/elements/create", {
-    body: JSON.stringfy(`{
+    body: JSON.stringify(`{
     "atomicNumber": 1,
     "symbol": "H",
     "name": "Hydrogen",
