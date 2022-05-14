@@ -7,14 +7,26 @@
     <title>Welcome to the periodic table api</title>
 
     <style>
+      html,
+      body {
+        margin: 0px;
+        padding: 0px;
+        background-color: rgb(216, 212, 212);
+      }
       main {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        min-width: 100%;
+        min-height: 90vh;
+        color: rgb(75, 72, 72);
+
+        text-decoration: none;
       }
       .container {
-        max-width: 50%;
+        min-width: 50%;
+        align-items: flex-start;
       }
 
       a {
@@ -26,7 +38,7 @@
     <main>
       <div class="container">
         <h1>Periodic table api</h1>
-        <h3>~ How to use</h3>
+        <h3>~ How to use ~</h3>
         <ul class="list"></ul>
       </div>
     </main>
@@ -34,31 +46,32 @@
     <script>
       let routes = [
         {
-          link: "/api/periodic-table/elements/",
+          link: "/api/elements/",
           name: "Method /Get: get data from the database",
         },
         {
-          link: "/api/periodic-table/elements/name",
-          name: "Method /Get: get data from the database",
+          link: "/api/elements/name",
+          name: "Method /Get: get data by name from the database",
         },
         {
-          link: "/api/periodic-table/elements/delete/:symbol",
-          name: "Create user",
-        },
-        { link: "/api/periodic-table/elements/create", name: "Create user" },
-        {
-          link: "/api/periodic-table/elements/update/:symbol",
-          name: "/PATCH update data by symbol",
+          link: "/api/elements/symbol",
+          name: "Method /Get: get data by symbol from the database",
         },
         {
-          link: "/api/periodic-table/elements/delete/:symbol",
-          name: "/Delete, Delete data by symbol",
+          link: "/api/elements/create",
+          name: "Method /Post: create a new element, to do this you have to be authenicated",
         },
+
+        // {
+        //   link: "/api/elements/update/:symbol",
+        //   name: "/PATCH update data by symbol",
+        // },
+        // { link: "/api/users/create", name: "Method /Post: Create user" },
       ]
 
       let ul = document.querySelector(".list")
 
-      routes.forEach((route) => {
+      routes.map((route) => {
         let li = document.createElement("li")
         let p = document.createElement("p")
         let a = document.createElement("a")

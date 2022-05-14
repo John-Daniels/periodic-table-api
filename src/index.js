@@ -29,7 +29,7 @@ app.use("/api/users", usersRouter)
 app.use("/api/elements", elementsRouter)
 
 // 404
-app.use("/*", express.static())
+app.use("/*", express.static(public))
 // app.use("/*", (req, res) => {
 //   // res.redirect("https://github.com/John-Daniels/periodic-table-api")
 
