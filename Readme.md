@@ -2,14 +2,14 @@
 
 # Usage
 
-## Example
+## Example (GET all elements)
 
 ```js
 // GET /api/elements
 
-const ajio = require("ajoijs")
+const ajio = require("ajio")
+ajio.baseUrl("https://apis-periodic-table.herokuapp.com/")
 
-// get all elements
 ajio
   .get("/api/elements")
   .then((elements) => console.log(elements))
@@ -22,9 +22,34 @@ ajio
     npm install ajiojs
 ```
 
-### Still working on the documentation
+## All Routes
 
-## You can create new Elements
+| Method | Route                | description                   |
+| ------ | -------------------- | ----------------------------- |
+| /Get   | /api/elements        | gets all the elements         |
+| /Get   | /api/elements/name   | gets an element by the name   |
+| /Get   | /api/elements/symbol | gets an element by the symbol |
+
+## Filtering and sorting (**new**)
+
+> Use conventional queries like sort and limit
+
+| sort         | limit         |
+| ------------ | ------------- |
+| default: asc | default: null |
+
+> note: asc is ascending order, desc is descending order
+
+```javascript
+const ajio = require("ajio")
+
+ajio.get("/api/elements?sort=desc&limit=5").then((elements) => {
+  console.log(elements)
+})
+// this returns the last 5 elements
+```
+
+## You can create new Elements (Authentication required!)
 
 ```javascript
 var ajio = require("ajio")
